@@ -6,13 +6,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Antheap.Model_file
+namespace Antheap.Model.SRTFile
 {
     internal class FileData
     {
         protected List<Component> content = new();
 
-        
+
 
         public FileData(string path)
         {
