@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Antheap" Height="450" Width="800">
     <Grid>
-        <Button Content="Modyfikacja .SRT" HorizontalAlignment="Left" Margin="643,391,0,0" VerticalAlignment="Top" Width="112" Click="Button_Click"/>
+        <Button Content="Modyfikacja .SRT" HorizontalAlignment="Left" Margin="601,358,0,0" VerticalAlignment="Top" Width="112" Click="Button_Click"/>
 
     </Grid>
 </Window>

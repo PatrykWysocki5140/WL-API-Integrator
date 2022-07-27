@@ -1,4 +1,5 @@
-﻿using Antheap.Model.File;
+﻿//using Antheap.Model.File;
+using Antheap.Model.SRTFile;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -14,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Diagnostics;
 
 namespace Antheap
 {
@@ -29,29 +31,31 @@ namespace Antheap
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            string dirname = Directory.GetCurrentDirectory();
-            MessageBox.Show(dirname);
-            FileData File = new(dirname + @"\napisy do filmu.srt");
-
-            Component item = new();
-            item = File.GetComponent(1);
             
-            MessageBox.Show(item.EndTime);
+            string dirname = Directory.GetCurrentDirectory();
 
+            FileData file = new(dirname + @"\napisy do filmu.srt");
+
+            if (file.FileOperations())
+            {
+                MessageBox.Show("Zmodyfikowany plik");
+            }
+
+            /* //Test czytanych linii
             List<Component> components = new List<Component>();
             components = File.GetComponents();
 
             foreach(var obj in components)
             {
-                MessageBox.Show(
+                Debug.WriteLine(
                     obj.Count.ToString () + "\n"+
                     obj.TextLineOne.ToString () + "\n"+
-                    //obj.TextLineTwo.ToString () + "\\n"+
+                    obj.TextLineTwo.ToString () + "\n"+
                     obj.StartTime.ToString () + "\n"+
-                    obj.EndTime.ToString () + "\n"
+                    obj.EndTime.ToString () + "\n" + "\n"
                     );
-            }
-
+            }              
+            */
         }
     }
 }
