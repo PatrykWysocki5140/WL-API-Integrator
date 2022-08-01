@@ -5,9 +5,85 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Antheap"
         mc:Ignorable="d"
-        Title="Antheap" Height="450" Width="800">
+        Title="Antheap" Height="936" Width="1484">
     <Grid>
-        <Button Content="Modyfikacja .SRT" HorizontalAlignment="Left" Margin="601,358,0,0" VerticalAlignment="Top" Width="112" Click="Button_Click"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="444*"/>
+            <ColumnDefinition Width="7*"/>
+        </Grid.ColumnDefinitions>
+        <Button Content="Modyfikacja .SRT" HorizontalAlignment="Left" Margin="1159,25,0,0" VerticalAlignment="Top" Width="249" Click="Button_Click" Height="93"/>
+        <Button x:Name="ContractorSearch" Content="Wyszukaj firmę" HorizontalAlignment="Left" Margin="47,79,0,0" VerticalAlignment="Top" Width="186" Height="48" Click="ContractorSearch_Click"/>
+        <TextBox x:Name="NIPTextBox" HorizontalAlignment="Left" Margin="47,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="186" Height="18" TextChanged="TextBox_TextChanged"/>
+        <Label Content="Wprowadź NIP" HorizontalAlignment="Left" Margin="47,25,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.526,0.502" Height="26" Width="186"/>
+        <Label Content="Id sprawdzenia" HorizontalAlignment="Left" Margin="38,170,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="ID" HorizontalAlignment="Left" Margin="38,196,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="186" Height="18" TextChanged="TextBox_TextChanged"/>
+        <Label Content="Nazwa firmy" HorizontalAlignment="Left" Margin="38,233,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="ContractorName" HorizontalAlignment="Left" Margin="38,259,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="406" Height="18" TextChanged="TextBox_TextChanged"/>
+        <Label Content="Regon" HorizontalAlignment="Left" Margin="38,296,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="REGON" HorizontalAlignment="Left" Margin="38,322,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="186" Height="18" TextChanged="TextBox_TextChanged"/>
+        <Label Content="NIP" HorizontalAlignment="Left" Margin="258,170,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="NIP" HorizontalAlignment="Left" Margin="258,196,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="186" Height="18" TextChanged="TextBox_TextChanged"/>
+        <Label Content="KRS" HorizontalAlignment="Left" Margin="258,296,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="KRS" HorizontalAlignment="Left" Margin="258,322,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="186" Height="18" TextChanged="TextBox_TextChanged"/>
+        <RichTextBox x:Name="AccountNumbers" Margin="39,666,1184,45" TextChanged="AccountNumbers_TextChanged" Visibility="Visible" Background="{x:Null}">
+            <FlowDocument>
+                <Paragraph>
+                    <Run Text=""/>
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+        <Label Content="Konta bankowe" HorizontalAlignment="Left" Margin="39,635,0,0" VerticalAlignment="Top"/>
+        <Label Content="Adres siedziby" HorizontalAlignment="Left" Margin="38,361,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="ResidenceAddress" HorizontalAlignment="Left" Margin="38,387,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="406" Height="18" TextChanged="TextBox_TextChanged"/>
+        <Label Content="Adres stałego miejsca prowadzenia działalności" HorizontalAlignment="Left" Margin="38,419,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="WorkingAddress" HorizontalAlignment="Left" Margin="38,450,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="406" Height="18" TextChanged="TextBox_TextChanged"/>
+        <Label Content="Data rejestracji jako podatnika VAT" HorizontalAlignment="Left" Margin="258,498,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="RegistrationLegalDate" HorizontalAlignment="Left" Margin="258,524,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="186" Height="18" TextChanged="TextBox_TextChanged"/>
+        <Label Content="Status podatnika VAT" HorizontalAlignment="Left" Margin="38,498,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="StatusVat" HorizontalAlignment="Left" Margin="38,524,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="186" Height="18" TextChanged="TextBox_TextChanged"/>
+        <Label Content="KRS" HorizontalAlignment="Left" Margin="38,561,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="KRS_Copy" HorizontalAlignment="Left" Margin="38,587,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="186" Height="18" TextChanged="TextBox_TextChanged"/>
+        <RichTextBox x:Name="Representatives" Margin="299,662,924,45">
+            <FlowDocument>
+                <Paragraph>
+                    <Run Text=""/>
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+        <Label Content="Reprezentanci" HorizontalAlignment="Left" Margin="299,635,0,0" VerticalAlignment="Top"/>
+        <RichTextBox x:Name="Partners" Margin="568,666,655,45" TextChanged="AccountNumbers_TextChanged" Visibility="Visible" Background="{x:Null}">
+            <FlowDocument>
+                <Paragraph>
+                    <Run Text=""/>
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+        <Label Content="Partnerzy" HorizontalAlignment="Left" Margin="568,635,0,0" VerticalAlignment="Top"/>
+        <RichTextBox x:Name="AuthorizedClerks" Margin="828,662,395,45">
+            <FlowDocument>
+                <Paragraph>
+                    <Run Text=""/>
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+        <Label Content="Prokurenci" HorizontalAlignment="Left" Margin="828,635,0,0" VerticalAlignment="Top"/>
+        <Label Content="Data usunięcia" HorizontalAlignment="Left" Margin="488,368,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="RemovalDate" HorizontalAlignment="Left" Margin="488,394,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="186" Height="18" TextChanged="TextBox_TextChanged"/>
+        <Label Content="Data odmowy rejestracji" HorizontalAlignment="Left" Margin="488,431,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="RegistrationDenialDate" HorizontalAlignment="Left" Margin="488,457,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="186" Height="18" TextChanged="TextBox_TextChanged"/>
+        <Label Content="Podstawa prawna odmowy rejestracji" HorizontalAlignment="Left" Margin="488,494,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="RegistrationDenialBasis" HorizontalAlignment="Left" Margin="488,520,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="186" Height="18" TextChanged="TextBox_TextChanged"/>
+        <Label Content="Data przywrócenia" HorizontalAlignment="Left" Margin="708,368,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="RestorationDate" HorizontalAlignment="Left" Margin="708,394,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="186" Height="18" TextChanged="TextBox_TextChanged"/>
+        <Label Content="Podstawa prawna przywrócenia" HorizontalAlignment="Left" Margin="708,431,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="RestorationBasis" HorizontalAlignment="Left" Margin="708,457,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="186" Height="18" TextChanged="TextBox_TextChanged"/>
+        <Label Content="Podstawa prawna wykreślenia odmowy rejestracji jako podatnika VAT" HorizontalAlignment="Left" Margin="708,494,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="RemovalBasis" HorizontalAlignment="Left" Margin="708,520,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="186" Height="18" TextChanged="TextBox_TextChanged"/>
+        <Label Content="Podmiot posiada maski kont wirtualnych" HorizontalAlignment="Left" Margin="488,561,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="HasVirtualAccounts" HorizontalAlignment="Left" Margin="488,587,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="186" Height="18" TextChanged="TextBox_TextChanged"/>
+        <Label Content="Podstawa prawna przywrócenia jako podatnika VAT" HorizontalAlignment="Left" Margin="708,561,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="RestorationBasis1" HorizontalAlignment="Left" Margin="708,587,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="186" Height="18" TextChanged="TextBox_TextChanged"/>
+        <ListBox x:Name="EntityItemsList" d:ItemsSource="{d:SampleData ItemCount=0}" Margin="488,26,567,557"/>
 
     </Grid>
 </Window>
