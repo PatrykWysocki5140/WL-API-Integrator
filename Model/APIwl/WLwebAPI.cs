@@ -20,7 +20,6 @@ namespace Antheap.Model.APIwl
             this.httpClient = httpClient;
         }
 
-        //public async Task<EntityResponse> GetDataFromNipAsync(string nip, DateTime dateTime)
         public async Task<EntityResponse> GetDataFromNipAsync(string nip, DateTime dateTime)
         {
             string GetString = string.Empty;
@@ -40,11 +39,6 @@ namespace Antheap.Model.APIwl
             {
                 throw;
             }
-        }
-
-       
-        
-        
-        
+        }    
     }
 }
