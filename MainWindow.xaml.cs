@@ -19,6 +19,7 @@ using System.Diagnostics;
 using Antheap.Model.APIwl;
 using System.Net.Http;
 using Antheap.Model.APIwl.Data;
+using Antheap.Model.Services;
 
 namespace Antheap
 {
@@ -68,7 +69,10 @@ namespace Antheap
         {
             try
             {
-                var resultNip = await wlAPI.GetDataFromNipAsync(NIPTextBox.Text, DateTime.Now);               
+                var resultNip = await wlAPI.GetDataFromNipAsync(NIPTextBox.Text, DateTime.Now);
+                Entity entity = new Entity();
+                DbServices db = new DbServices("datasource=127.0.0.1;port=3306;username=root;password=;database=antheap;");
+
                 if (resultNip.Exception is null)
                 {                  
                     ID.Text = resultNip.Result?.RequestId;
@@ -122,8 +126,10 @@ namespace Antheap
                         RestorationBasis.Text = resultNip.Result?.Subject?.RestorationBasis?.ToString();
                         HasVirtualAccounts.Text = resultNip.Result?.Subject?.HasVirtualAccounts?.ToString();
 
-                        wlItems.Add(resultNip.Result?.Subject);
                         EntityItemsList.Items.Add(resultNip.Result?.Subject.Nip);
+                        entity = resultNip.Result?.Subject;
+                        wlItems.Add(entity);
+                        db.InsertCompany(entity);
                     }
                 }
                 else
