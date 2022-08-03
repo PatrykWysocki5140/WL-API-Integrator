@@ -120,5 +120,7 @@ namespace Antheap.Model.APIwl.Data
         /// </summary>
         /// <value>Podmiot posiada maski kont wirtualnych </value>
         public bool? HasVirtualAccounts { get; set; }
+
+        
     }
 }

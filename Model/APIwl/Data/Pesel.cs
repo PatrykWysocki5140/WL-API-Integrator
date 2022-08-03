@@ -8,9 +8,11 @@ namespace Antheap.Model.APIwl.Data
 {
     internal class Pesel
     {
+        public int PeselNumber { get; set; }
+        /*
         public static explicit operator Pesel(string v)
         {
             throw new NotImplementedException();
-        }
+        }*/
     }
 }

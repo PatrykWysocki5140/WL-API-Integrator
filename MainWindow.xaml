@@ -5,13 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Antheap"
         mc:Ignorable="d"
-        Title="Antheap" Height="936" Width="1484">
+        Title="Antheap" Height="936" Width="1484" WindowStyle="None"
+>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="444*"/>
             <ColumnDefinition Width="7*"/>
         </Grid.ColumnDefinitions>
-        <Button Content="Modyfikacja .SRT" HorizontalAlignment="Left" Margin="1159,25,0,0" VerticalAlignment="Top" Width="249" Click="Button_Click" Height="93"/>
+        <Button Content="Modyfikacja .SRT" HorizontalAlignment="Left" Margin="1172,181,0,0" VerticalAlignment="Top" Width="249" Click="Button_Click" Height="94"/>
         <Button x:Name="ContractorSearch" Content="Wyszukaj firmę" HorizontalAlignment="Left" Margin="47,79,0,0" VerticalAlignment="Top" Width="186" Height="48" Click="ContractorSearch_Click"/>
         <TextBox x:Name="NIPTextBox" HorizontalAlignment="Left" Margin="47,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="186" Height="18" TextChanged="TextBox_TextChanged"/>
         <Label Content="Wprowadź NIP" HorizontalAlignment="Left" Margin="47,25,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.526,0.502" Height="26" Width="186"/>
@@ -83,7 +84,11 @@
         <TextBox x:Name="HasVirtualAccounts" HorizontalAlignment="Left" Margin="488,587,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="186" Height="18" TextChanged="TextBox_TextChanged"/>
         <Label Content="Podstawa prawna przywrócenia jako podatnika VAT" HorizontalAlignment="Left" Margin="708,561,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="RestorationBasis1" HorizontalAlignment="Left" Margin="708,587,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="186" Height="18" TextChanged="TextBox_TextChanged"/>
-        <ListBox x:Name="EntityItemsList" d:ItemsSource="{d:SampleData ItemCount=0}" Margin="488,26,567,557"/>
+        <ListBox x:Name="EntityItemsList" d:ItemsSource="{d:SampleData ItemCount=0}" Margin="488,45,567,562" SelectionChanged="EntityItemsList_SelectionChanged"/>
+        <Label Content="Lista wyszukiwanych firm" HorizontalAlignment="Left" Margin="488,12,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.526,0.502" Height="26" Width="186"/>
+        <Button Content="Wyjdź" HorizontalAlignment="Left" Margin="1336,12,0,0" VerticalAlignment="Top" Width="125" Click="Close" Height="39" Grid.ColumnSpan="2"/>
+        <GridSplitter HorizontalAlignment="Left" Height="916" Margin="1128,0,0,0" VerticalAlignment="Center" Width="5"/>
+        <Label Content="Druga część zadania" HorizontalAlignment="Left" Margin="1238,150,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.526,0.502" Height="26" Width="119"/>
 
     </Grid>
 </Window>

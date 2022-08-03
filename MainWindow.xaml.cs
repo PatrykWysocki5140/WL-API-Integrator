@@ -30,15 +30,22 @@ namespace Antheap
     {
         private WLwebAPI wlAPI = new WLwebAPI(new HttpClient());
         private List<Entity> wlItems = new();
+        private List<Company> dbItems = new();
+
+        DbServices db = new DbServices("datasource=127.0.0.1;port=3306;username=root;password=;database=antheap;");
 
         public MainWindow()
         {
             InitializeComponent();
+            dbItems = db.SelectCompany(true);
+            foreach(Company company in dbItems)
+            {
+                EntityItemsList.Items.Add(company.Nip);
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            
+        {          
             string dirname = Directory.GetCurrentDirectory();
 
             FileData file = new(dirname + @"\napisy do filmu.srt");
@@ -71,65 +78,18 @@ namespace Antheap
             {
                 var resultNip = await wlAPI.GetDataFromNipAsync(NIPTextBox.Text, DateTime.Now);
                 Entity entity = new Entity();
-                DbServices db = new DbServices("datasource=127.0.0.1;port=3306;username=root;password=;database=antheap;");
+                
 
                 if (resultNip.Exception is null)
                 {                  
                     ID.Text = resultNip.Result?.RequestId;
                     if (resultNip.Result?.Subject?.Name is not null)
                     {
-                        ContractorName.Text = resultNip.Result?.Subject?.Name;
-                        NIP.Text = resultNip.Result?.Subject?.Nip;
-                        REGON.Text = resultNip.Result?.Subject?.Regon;
-                        if (resultNip.Result?.Subject?.AccountNumbers is not null)
-                        {
-                            foreach (var item in resultNip.Result?.Subject?.AccountNumbers)
-                            {
-                                AccountNumbers.AppendText("\r\n" + item);
-                            }
-                            AccountNumbers.ScrollToEnd();
-                        }
-                        KRS.Text = resultNip.Result?.Subject.Krs;
-                        ResidenceAddress.Text = resultNip.Result?.Subject?.ResidenceAddress?.ToString();
-                        StatusVat.Text = resultNip.Result?.Subject?.StatusVat.ToString();
-                        WorkingAddress.Text = resultNip.Result?.Subject?.WorkingAddress.ToString();
-                        RegistrationLegalDate.Text = resultNip.Result?.Subject?.RegistrationLegalDate.ToString();
-                        if (resultNip.Result?.Subject?.RegistrationLegalDate is not null)
-                        {
-                            foreach (var item in resultNip.Result?.Subject?.Representatives)
-                            {
-                                Representatives.AppendText(item.FirstName + " " + item.LastName + " " + item.Pesel);
-                            }
-                            Representatives.ScrollToEnd();
-                        }
-                        if (resultNip.Result?.Subject?.Partners is not null)
-                        {
-                            foreach (var item in resultNip.Result?.Subject?.Partners)
-                            {
-                                Partners.AppendText("\r\n" + item.FirstName + " " + item.LastName + " " + item.Pesel);
-                            }
-                            Partners.ScrollToEnd();
-                        }
-                        if (resultNip.Result?.Subject?.AuthorizedClerks is not null)
-                        {
-                            foreach (var item in resultNip.Result?.Subject?.AuthorizedClerks)
-                            {
-                                AuthorizedClerks.AppendText("\r\n" + item.FirstName + " " + item.LastName + " " + item.Pesel);
-                            }
-                            AuthorizedClerks.ScrollToEnd();
-                        }
-                        RemovalDate.Text = resultNip.Result?.Subject?.RemovalDate?.ToString();
-                        RestorationDate.Text = resultNip.Result?.Subject?.RestorationDate?.ToString();
-                        RegistrationDenialDate.Text = resultNip.Result?.Subject?.RegistrationDenialDate.ToString();
-                        RegistrationDenialBasis.Text = resultNip.Result?.Subject?.RegistrationDenialBasis?.ToString();
-                        RemovalBasis.Text = resultNip.Result?.Subject?.RemovalBasis?.ToString();
-                        RestorationBasis.Text = resultNip.Result?.Subject?.RestorationBasis?.ToString();
-                        HasVirtualAccounts.Text = resultNip.Result?.Subject?.HasVirtualAccounts?.ToString();
-
                         EntityItemsList.Items.Add(resultNip.Result?.Subject.Nip);
                         entity = resultNip.Result?.Subject;
                         wlItems.Add(entity);
                         db.InsertCompany(entity);
+                        LoadContractor(db.SelectCompany(entity.Nip));
                     }
                 }
                 else
@@ -143,10 +103,96 @@ namespace Antheap
             }
             
         }
+        private void LoadContractor(Company entity)
+        {
+            ClearContractor();
+
+            ContractorName.Text = entity.Name;
+            NIP.Text = entity.Nip;
+            REGON.Text = entity?.Regon;
+            
+            if (entity?.AccountNumbers is not null)
+            {
+                foreach (var item in entity?.AccountNumbers)
+                {
+                    AccountNumbers.AppendText("\r\n" + item);
+                }
+                AccountNumbers.ScrollToEnd();
+            }
+            KRS.Text = entity?.Krs;
+            ResidenceAddress.Text = entity?.ResidenceAddress?.ToString();
+            StatusVat.Text = entity?.StatusVat?.ToString();
+            WorkingAddress.Text = entity?.WorkingAddress?.ToString();
+            RegistrationLegalDate.Text = entity?.RegistrationLegalDate?.ToString();
+            if (entity?.RegistrationLegalDate is not null)
+            {
+                foreach (var item in entity?.Representatives)
+                {
+                    Representatives.AppendText(item.FirstName + " " + item.LastName + " " + item.Pesel);
+                }
+                Representatives.ScrollToEnd();
+            }
+            if (entity?.Partners is not null)
+            {
+                foreach (var item in entity?.Partners)
+                {
+                    Partners.AppendText("\r\n" + item.FirstName + " " + item.LastName + " " + item.Pesel);
+                }
+                Partners.ScrollToEnd();
+            }
+            if (entity?.AuthorizedClerks is not null)
+            {
+                foreach (var item in entity?.AuthorizedClerks)
+                {
+                    AuthorizedClerks.AppendText("\r\n" + item.FirstName + " " + item.LastName + " " + item.Pesel);
+                }
+                AuthorizedClerks.ScrollToEnd();
+            }
+            RemovalDate.Text = entity?.RemovalDate?.ToString();
+            RestorationDate.Text = entity?.RestorationDate?.ToString();
+            RegistrationDenialDate.Text = entity?.RegistrationDenialDate?.ToString();
+            RegistrationDenialBasis.Text = entity?.RegistrationDenialBasis?.ToString();
+            RemovalBasis.Text = entity?.RemovalBasis?.ToString();
+            RestorationBasis.Text = entity?.RestorationBasis?.ToString();
+            HasVirtualAccounts.Text = entity?.HasVirtualAccounts?.ToString();
+        }
+
+        private void ClearContractor()
+        {
+            ContractorName.Text = String.Empty;
+            NIP.Text = String.Empty;
+            REGON.Text = String.Empty;
+            AccountNumbers.Document.Blocks.Clear();         
+            KRS.Text = String.Empty;
+            ResidenceAddress.Text = String.Empty;
+            StatusVat.Text = String.Empty;
+            WorkingAddress.Text = String.Empty;
+            RegistrationLegalDate.Text = String.Empty;
+            Representatives.Document.Blocks.Clear();
+            Partners.Document.Blocks.Clear();
+            AuthorizedClerks.Document.Blocks.Clear();
+            RemovalDate.Text = String.Empty;
+            RestorationDate.Text = String.Empty;
+            RegistrationDenialDate.Text = String.Empty;
+            RegistrationDenialBasis.Text = String.Empty;
+            RemovalBasis.Text = String.Empty;
+            RestorationBasis.Text = String.Empty;
+            HasVirtualAccounts.Text = String.Empty;
+        }
 
         private void AccountNumbers_TextChanged(object sender, TextChangedEventArgs e)
         {
+            
+        }
 
+        private void EntityItemsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            LoadContractor(db.SelectCompany(EntityItemsList.SelectedItem.ToString()));
+        }
+
+        private void Close(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }
